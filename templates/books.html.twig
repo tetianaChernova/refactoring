@@ -1,0 +1,32 @@
+{#повністю відокремити рівень представлення від бізнес-логіки – зокрема,
+на сторінці, яка призначена для відображення, не повинно бути PHP-коду;#}
+
+<html>
+<head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1251">
+    <title> No template page </title>
+{#    оформлення сторінки здійснювати на основі таблиць стилів;#}
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="centered_text">
+{#    уникати deprecated-тегів (зокрема, <font>);
+      тому для даного заголовку доданий клас "header"
+      стилі якого описані в таблиці стилів#}
+    <span class="header">
+        <h1>BOOK CATALOGUE</h1>
+    </span>
+</div>
+<br/><br/>
+{#повністю відокремити рівень представлення від бізнес-логіки – зокрема,
+для такого відокремлення використано Twig;#}
+{% for book in books %}
+{#    книжки, видані після 2010 року, повинні відображатися жирним шрифтом.#}
+    {% if(book.year > 2010) %}
+        <b> {{ book.author }} - {{ book.title }} - {{ book.year }} <br/> </b>
+    {% else %}
+        {{ book.author }} - {{ book.title }} - {{ book.year }} <br/>
+    {% endif %}
+{% endfor %}
+</body>
+</html>
